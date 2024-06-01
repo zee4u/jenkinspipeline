@@ -1,16 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        // Install the JDK and Gradle
-        jdk 'OpenJDK 11'
-        gradle 'Gradle 6.7'
-    }
-
-    environment {
-        // Set environment variables if necessary
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -37,14 +27,6 @@ pipeline {
             }
         }
 
-        stage('Package') {
-            steps {
-                // Package the application (e.g., create a JAR file)
-                script {
-                    sh './gradlew assemble'
-                }
-            }
-        }
 
         stage('Deploy') {
             steps {
@@ -56,19 +38,5 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Perform actions that always need to happen after the pipeline (e.g., clean up)
-            cleanWs()
-        }
-        success {
-            // Actions to perform if the pipeline succeeds
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            // Actions to perform if the pipeline fails
-            echo 'Pipeline failed!'
-        }
     }
 }
